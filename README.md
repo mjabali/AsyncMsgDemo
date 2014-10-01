@@ -1,5 +1,5 @@
-AsyncMsgDemo
-============
+Asynchronous Mobile Messaging Demo
+==================================
 
 Oracle MAF Asynchronous Messaging Demo
 
