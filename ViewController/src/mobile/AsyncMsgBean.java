@@ -23,10 +23,6 @@ public class AsyncMsgBean {
     }
     public void setMessageResult (String messageResult)
     {
-      // When the barcode scanning is complete, the success callback of the Cordova
-      // barcode scanning JavaScript function will invoke this method indirectly, by
-      // evaluating the EL expression #{viewScope.BarcodeBean.barcodeResult}. It will
-      // pass us the barcode that was scanned (or an error message).
       String oldMessageResult = "Bean:setMessageResult" + this.messageResult;
       this.messageResult = messageResult;
       propertyChangeSupport.firePropertyChange ("messageResult", oldMessageResult, messageResult);
