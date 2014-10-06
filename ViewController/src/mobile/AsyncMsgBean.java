@@ -8,6 +8,17 @@ import oracle.adfmf.java.beans.PropertyChangeSupport;
 
 public class AsyncMsgBean {
     private String messageResult = "No messages received yet";
+    private String messageRequest = "";
+
+    public void setMessageRequest(String messageRequest) {
+        String oldMessageRequest = this.messageRequest;
+        this.messageRequest = messageRequest;
+        propertyChangeSupport.firePropertyChange("messageRequest", oldMessageRequest, messageRequest);
+    }
+
+    public String getMessageRequest() {
+        return messageRequest;
+    }
 
     public String getMessageResult() {
         return messageResult;
@@ -17,9 +28,10 @@ public class AsyncMsgBean {
     }
 
     public void sendAsyncMsg(ActionEvent actionEvent) {
+        String message = (String)AdfmfJavaUtilities.evaluateELExpression("#{viewScope.AsyncMsgBean.messageRequest}");
         AdfmfContainerUtilities.invokeContainerJavaScriptFunction(AdfmfJavaUtilities.getFeatureName(),
                                                                        "sendAsyncMessage",
-                                                                       new Object[] { });
+                                                                       new Object[] { message });
     }
     public void setMessageResult (String messageResult)
     {

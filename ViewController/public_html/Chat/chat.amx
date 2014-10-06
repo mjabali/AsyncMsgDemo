@@ -5,8 +5,10 @@
     <amx:verbatim id="v1">
          <![CDATA[
         <script type="text/javascript">
-        function sendAsyncMessage(){
-            var wsUri = "ws://10.0.1.2:7001/WS_Echo/echo";
+        message = null;
+        function sendAsyncMessage(msg){
+            message = msg;
+            var wsUri = "ws://localhost:7001/WS_Echo/echo";
             websocket = new WebSocket(wsUri);
             websocket.onmessage = function(evt) { onMessage(evt) };
             websocket.onopen = function(evt) { onOpen(evt) };
@@ -15,15 +17,8 @@
         }
         function onOpen(evt) {
             //alert("CONNECTED");
-            adf.mf.api.setValue( { "name": "#{viewScope.AsyncMsgBean.messageResult}", 
-                                   "value": "Connected" }, 
-                                   function() {}, 
-                                   function() {}
-                                );
-            
-            websocket.send("Test Message");
+            websocket.send(message);
         }
-        
         function onMessage(evt) {
             msg = evt.data;
             //alert(msg);
@@ -33,11 +28,9 @@
                                    function() {}
                                 );
         }
-    
         function onError(evt) {
             alert("error");
         }
-        
         </script>
     ]]>
     </amx:verbatim>
@@ -47,9 +40,10 @@
     <amx:facet name="secondary">
       <amx:commandButton text="Send" id="cl2" actionListener="#{viewScope.AsyncMsgBean.sendAsyncMsg}"/>
     </amx:facet>
-    <amx:outputText value="Press the Send button on the top right to send an async message." id="ot3"/>
+    <amx:inputText label="Type Your Name Here:" id="it1" value="#{viewScope.AsyncMsgBean.messageRequest}"/>
+    <amx:outputText value="Press the Send button on the top right to send the message." id="ot3"/>
     <amx:spacer id="s1" height="10"/>
-    <amx:outputText value="The received messages will be displayed below:" id="ot5"/>
+    <amx:outputText value="The messages received will be displayed below:" id="ot5"/>
     <amx:outputText value="#{viewScope.AsyncMsgBean.messageResult}" id="ot2"/>
   </amx:panelPage>
 </amx:view>

@@ -13,7 +13,6 @@ Developed and tested with JDeveloper 12c (12.1.3.0.0)
 Download or clone this repo, open it up in JDeveloper 12c and deploy to simulator/emulator/device of your choice.
 This repo contains the mobile application source code and doesn't provide the server side of it. You can easily setup a WebSocket server with Oracle WebLogic 12c.
 
-###To Do:
-Add server side code to this demo.
+The server side of this demonstration (a simple WebSocket Server Endpoint running on Oracle WebLogic 12c) can be found here: https://github.com/mjabali/WS-Echo
 
 Have fun!
